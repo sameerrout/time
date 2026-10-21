@@ -1,4 +1,11 @@
-# Ignore native application source trees during Vercel static deployments
+# Ignore Python triggers so Vercel does not attempt serverless Python detection
+requirements.txt
+pyproject.toml
+Pipfile
+setup.py
+*.py
+
+# Ignore backend and mobile source code trees
 android/
 app/
 tests/
@@ -8,7 +15,6 @@ data/
 backups/
 dist/
 build/
-*.py
 *.bat
 *.spec
 *.md
