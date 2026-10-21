@@ -1,0 +1,23 @@
+﻿{
+    "version":  "1.0.0",
+    "releaseDate":  "2026-10-21",
+    "githubRepo":  "sameerrout/time",
+    "downloads":  {
+                      "android":  {
+                                      "filename":  "TTL-Scanner-1.0.0.apk",
+                                      "version":  "1.0.0",
+                                      "platform":  "Android 7.0+ (ARM64 / x86_64)",
+                                      "size":  "34.5 MB",
+                                      "sha256":  "0923ffe7136a3b7c586abe955721bdb35e2f486db0c18d4fc3057062d660e39e",
+                                      "url":  "https://github.com/sameerrout/time/releases/download/v1.0.0/TTL-Scanner-1.0.0.apk"
+                                  },
+                      "windows":  {
+                                      "filename":  "IssueSlipManager-v1.0.0-Windows-x64.zip",
+                                      "version":  "1.0.0",
+                                      "platform":  "Windows 10 / 11 (64-bit)",
+                                      "size":  "179.4 MB",
+                                      "sha256":  "f4c4ac6b06018f92ea64e67e7db4a9a9db1a4a4b70a1f49c0118801593c7dc27",
+                                      "url":  "https://github.com/sameerrout/time/releases/download/v1.0.0/IssueSlipManager-v1.0.0-Windows-x64.zip"
+                                  }
+                  }
+}

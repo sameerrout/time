@@ -1,0 +1,43 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.env
+venv/
+env/
+.pytest_cache/
+
+# Binaries & Bundles
+bin/cloudflared.exe
+*.exe
+dist/
+build/
+*.spec.bak
+
+# Android Keystores & Signing Secrets
+*.jks
+*.keystore
+*.pk8
+signing.properties
+android/.gradle/
+android/build/
+android/app/build/
+android/local.properties
+
+# Logs and Local Data
+logs/
+*.log
+backups/
+*.zip
+data/
+data/certs/
+data/*.db
+data/*.json
+data/.write_test
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

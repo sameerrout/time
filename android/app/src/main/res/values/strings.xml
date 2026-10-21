@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TTL Scanner</string>
+    <string name="title_home">TTL Scanner</string>
+    <string name="title_pairing">Connect to Desktop</string>
+    <string name="title_issue_scanner">Issue Slip Scanner</string>
+    <string name="title_purchase_scanner">Purchase Order Scanner</string>
+    <string name="title_history">Scan History</string>
+    <string name="title_settings">Settings</string>
+</resources>

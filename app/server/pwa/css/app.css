@@ -1,0 +1,599 @@
+:root {
+  --primary: #1e3a8a;
+  --issue-color: #ea580c;
+  --issue-bg: #fff7ed;
+  --receive-color: #16a34a;
+  --receive-bg: #f0fdf4;
+  --bg: #0f172a;
+  --card-bg: #1e293b;
+  --card-border: #334155;
+  --text-main: #f8fafc;
+  --text-sub: #94a3b8;
+  --danger: #ef4444;
+  --success: #22c55e;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background-color: var(--bg);
+  color: var(--text-main);
+  height: 100vh;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Header */
+.app-header {
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  background-color: var(--card-bg);
+  border-bottom: 2px solid var(--issue-color);
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  z-index: 10;
+}
+
+.app-header.mode-issue {
+  border-bottom-color: var(--issue-color);
+}
+
+.app-header.mode-receive {
+  border-bottom-color: var(--receive-color);
+}
+
+.brand-title {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.brand-badge {
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.mode-issue .brand-badge {
+  background-color: var(--issue-color);
+  color: #ffffff;
+}
+
+.mode-receive .brand-badge {
+  background-color: var(--receive-color);
+  color: #ffffff;
+}
+
+.header-status {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.status-pill {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 3px 8px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #334155;
+  color: var(--text-sub);
+}
+
+.status-pill.online {
+  background: rgba(34, 197, 94, 0.15);
+  color: #4ade80;
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.status-pill.offline {
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  color: var(--text-sub);
+  font-size: 20px;
+  padding: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Main Container */
+.main-view {
+  flex: 1;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+/* Camera Viewport */
+.scanner-viewport {
+  flex: 1;
+  position: relative;
+  background-color: #000000;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+#camera-video, #html5-qr-reader {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border: none !important;
+}
+
+/* Targeting Overlay */
+.target-box {
+  position: absolute;
+  width: 250px;
+  height: 250px;
+  border: 2px dashed rgba(255, 255, 255, 0.6);
+  border-radius: 16px;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 0 0 4000px rgba(0, 0, 0, 0.45);
+}
+
+.target-laser {
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background-color: var(--issue-color);
+  box-shadow: 0 0 8px var(--issue-color);
+  animation: scanLaser 2s infinite ease-in-out;
+}
+
+.mode-receive .target-laser {
+  background-color: var(--receive-color);
+  box-shadow: 0 0 8px var(--receive-color);
+}
+
+@keyframes scanLaser {
+  0% { top: 10%; opacity: 0.8; }
+  50% { top: 90%; opacity: 1; }
+  100% { top: 10%; opacity: 0.8; }
+}
+
+/* Viewport Controls */
+.viewport-controls {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 5;
+}
+
+.control-pill-btn {
+  background: rgba(15, 23, 42, 0.85);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #ffffff;
+  padding: 8px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  backdrop-filter: blur(4px);
+}
+
+/* Sync Queue Banner */
+.sync-banner {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(234, 88, 12, 0.95);
+  color: #ffffff;
+  padding: 6px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 700;
+  display: none;
+  z-index: 5;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Bottom Confirmation Sheet */
+.bottom-sheet {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #1e293b;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 18px 20px 24px 20px;
+  box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.5);
+  transform: translateY(105%);
+  transition: transform 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 20;
+  max-height: 85vh;
+  overflow-y: auto;
+}
+
+.bottom-sheet.open {
+  transform: translateY(0);
+}
+
+.sheet-handle {
+  width: 40px;
+  height: 4px;
+  background-color: #475569;
+  border-radius: 2px;
+  margin: 0 auto 14px auto;
+}
+
+.sheet-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.sheet-code {
+  font-size: 17px;
+  font-weight: 800;
+  color: #38bdf8;
+}
+
+.sheet-name {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin-top: 2px;
+  line-height: 130%;
+}
+
+.stock-tag {
+  background: #334155;
+  color: #f1f5f9;
+  font-size: 12px;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+.warn-stock-limit {
+  color: #ef4444;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: none;
+}
+
+/* Stepper & Numeric Input */
+.input-row {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+
+.input-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-sub);
+  text-transform: uppercase;
+}
+
+.stepper-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.btn-stepper {
+  width: 48px;
+  height: 48px;
+  background-color: #334155;
+  border: 1px solid #475569;
+  color: #ffffff;
+  border-radius: 8px;
+  font-size: 22px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.btn-stepper:active {
+  background-color: #475569;
+}
+
+.stepper-input {
+  flex: 1;
+  height: 48px;
+  background-color: #0f172a;
+  border: 1px solid #475569;
+  color: #ffffff;
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  border-radius: 8px;
+}
+
+.text-field {
+  width: 100%;
+  height: 42px;
+  background-color: #0f172a;
+  border: 1px solid #475569;
+  color: #ffffff;
+  font-size: 14px;
+  padding: 0 12px;
+  border-radius: 8px;
+}
+
+/* Action Buttons */
+.sheet-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-top: 16px;
+}
+
+.btn-action-primary {
+  height: 48px;
+  border: none;
+  border-radius: 8px;
+  font-size: 15px;
+  font-weight: 700;
+  color: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+
+.mode-issue .btn-action-primary {
+  background-color: var(--issue-color);
+}
+.mode-issue .btn-action-primary:active {
+  background-color: #c2410c;
+}
+
+.mode-receive .btn-action-primary {
+  background-color: var(--receive-color);
+}
+.mode-receive .btn-action-primary:active {
+  background-color: #15803d;
+}
+
+.btn-action-secondary {
+  height: 48px;
+  background-color: #334155;
+  border: 1px solid #475569;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #f8fafc;
+  cursor: pointer;
+}
+
+.btn-action-secondary:active {
+  background-color: #475569;
+}
+
+/* Unknown Material Alert Overlay */
+.alert-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(185, 28, 28, 0.95);
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  text-align: center;
+  z-index: 30;
+  transform: translateY(105%);
+  transition: transform 0.25s ease-out;
+}
+
+.alert-overlay.open {
+  transform: translateY(0);
+}
+
+.alert-icon {
+  font-size: 54px;
+  margin-bottom: 12px;
+}
+
+.alert-title {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.alert-desc {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 24px;
+  max-width: 300px;
+}
+
+/* Bottom Navigation Bar: Two Big Mode Tabs */
+.app-nav {
+  height: 68px;
+  background-color: #1e293b;
+  border-top: 1px solid var(--card-border);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  padding: 6px 12px;
+  gap: 10px;
+  z-index: 10;
+}
+
+.nav-tab {
+  border: none;
+  border-radius: 10px;
+  background: transparent;
+  color: var(--text-sub);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 12px;
+  font-weight: 700;
+  gap: 2px;
+}
+
+.nav-tab .tab-icon {
+  font-size: 19px;
+}
+
+.nav-tab.tab-issue.active {
+  background-color: var(--issue-color);
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(234, 88, 12, 0.4);
+}
+
+.nav-tab.tab-receive.active {
+  background-color: var(--receive-color);
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(22, 163, 74, 0.4);
+}
+
+/* Modal Dialogs */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(4px);
+  z-index: 50;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.open {
+  display: flex;
+}
+
+.modal-box {
+  background-color: #1e293b;
+  border: 1px solid var(--card-border);
+  border-radius: 16px;
+  width: 100%;
+  max-width: 420px;
+  padding: 24px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.modal-title {
+  font-size: 18px;
+  font-weight: 800;
+}
+
+/* History List in Modal */
+.scan-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 320px;
+  overflow-y: auto;
+  margin: 12px 0;
+}
+
+.history-item {
+  background-color: #0f172a;
+  border: 1px solid #334155;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.history-item.issue {
+  border-left: 4px solid var(--issue-color);
+}
+
+.history-item.receive {
+  border-left: 4px solid var(--receive-color);
+}
+
+.history-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.history-code {
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.history-time {
+  font-size: 11px;
+  color: var(--text-sub);
+}
+
+.history-badge {
+  font-size: 10px;
+  font-weight: 700;
+  padding: 3px 7px;
+  border-radius: 4px;
+  text-transform: uppercase;
+}
+
+.history-badge.applied {
+  background: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+}
+
+.history-badge.pending {
+  background: rgba(234, 88, 12, 0.2);
+  color: #fb923c;
+}
+
+.history-badge.rejected {
+  background: rgba(239, 68, 68, 0.2);
+  color: #f87171;
+}
