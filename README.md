@@ -1,138 +1,96 @@
-# Issue Slip Manager & TTL Scanner Suite
+# Issue Slip Manager
 
 <p align="center">
-  <img src="assets/icons/app_icon.png" width="96" height="96" alt="TTL Scanner Suite Logo" />
+  <img src="assets/icons/app_icon.png" width="96" height="96" alt="Issue Slip Manager Logo" />
 </p>
 
 <p align="center">
-  <strong>High-Speed Industrial Wireless Barcode & Issue Slip System</strong><br>
-  <em>100% Local SQLite &bull; Zero Cloud Storage &bull; Offline-First &bull; Local Wi-Fi + Encrypted Zero-Config Remote Tunnel</em>
+  <strong>Fast, Standalone Windows Desktop Barcode & Material Issue System</strong><br>
+  <em>100% Local SQLite &bull; Zero Cloud Dependency &bull; Wireless Mobile Barcode Scanning with GlobalScan</em>
 </p>
 
 <p align="center">
-  <a href="https://github.com/sameerrout/time/releases/tag/v1.0.0"><img src="https://img.shields.io/badge/Release-v1.0.0-emerald?style=for-the-badge&logo=github" alt="Release v1.0.0"></a>
   <img src="https://img.shields.io/badge/Windows-10%20%7C%2011%20x64-blue?style=for-the-badge&logo=windows" alt="Windows 10/11">
-  <img src="https://img.shields.io/badge/Android-7.0%2B-green?style=for-the-badge&logo=android" alt="Android 7.0+">
+  <img src="https://img.shields.io/badge/Scanner-GlobalScan%20Play%20Store-green?style=for-the-badge&logo=googleplay" alt="Play Store Scanner">
   <img src="https://img.shields.io/badge/Data%20Privacy-100%25%20Local-purple?style=for-the-badge" alt="Local Data">
-  <img src="https://img.shields.io/badge/Tests-84%2F84%20Passing-brightgreen?style=for-the-badge" alt="84 Tests Passing">
+  <img src="https://img.shields.io/badge/Tests-76%2F76%20Passing-brightgreen?style=for-the-badge" alt="76 Tests Passing">
 </p>
 
 ---
 
-## 🌐 Live Web Site & Downloads
+## ⚡ Overview
 
-You can view the interactive download site directly via GitHub Pages or open `index.html`:
-- 🔗 **Web Site**: [https://sameerrout.github.io/time/](https://sameerrout.github.io/time/) *(enable GitHub Pages on branch `main`)*
-- 📦 **GitHub Releases**: [https://github.com/sameerrout/time/releases/tag/v1.0.0](https://github.com/sameerrout/time/releases/tag/v1.0.0)
+**Issue Slip Manager** is a high-speed, offline Windows desktop application built with Python 3.11, PySide6 (Qt6), SQLite, ReportLab, and openpyxl.
 
-### 📥 One-Click Downloads
+It provides factory floors and warehouses with instant material issue tracking, printable barcode/QR sticker sheets, inventory stock ledger, and seamless wireless barcode scanning from your smartphone.
 
-| Target | Platform | Asset | Size | Checksum (SHA-256) |
-|---|---|---|---|---|
-| **Windows Desktop** | Windows 10 / 11 (64-bit) | [**Download Windows ZIP**](https://github.com/sameerrout/time/releases/download/v1.0.0/IssueSlipManager-v1.0.0-Windows-x64.zip) | ~179 MB | `f4c4ac6b06018f92ea64e67e7db4a9a9db1a4a4b70a1f49c0118801593c7dc27` |
-| **Mobile Scanner** | Android 7.0+ (ARM64 / x86_64) | [**Download Android APK**](https://github.com/sameerrout/time/releases/download/v1.0.0/TTL-Scanner-1.0.0.apk) | ~34.5 MB | `0923ffe7136a3b7c586abe955721bdb35e2f486db0c18d4fc3057062d660e39e` |
+### 🛡️ 100% Local Data Privacy (Zero Cloud)
+* **Zero Cloud Storage**: All materials, issue slips, purchase records, and stock balances are stored strictly in your local SQLite database on your computer (`data/issue_slip.db`).
+* **No Third-Party Hosting or Servers**: Runs independently without cloud subscriptions, external APIs, or complex deployment dependencies.
 
 ---
 
-## ⚡ What is TTL Scanner Suite?
+## 📱 Wireless Phone Scanner Setup (GlobalScan)
 
-TTL Scanner Suite transforms factory floors, stockrooms, and warehouses by turning any Android smartphone into a rugged, high-speed wireless barcode & QR scanner that feeds live inventory and issue slips directly into your desktop database.
-
-### 🛡️ Hard Privacy & Security Rules (Zero Cloud)
-1. **NO DATA IN THE CLOUD**: There are zero cloud databases and zero cloud APIs holding inventory, users, or scan logs. All data lives in your local SQLite database file on your PC.
-2. **Offline-First Queue**: The mobile scanner caches all scans locally in an encrypted Room SQLite database if the network drops. Scans sync automatically once connection resumes.
-3. **Dual Connection Modes**:
-   - **Local Wi-Fi Mode**: Connects directly over LAN with self-signed TLS certificates and mDNS discovery.
-   - **Remote Tunnel Mode**: Built-in Cloudflare quick tunnel for off-site or multi-building scanning without static IPs, port forwarding, or firewall changes.
-
----
-
-## 📱 Features
-
-### Desktop Application (`IssueSlipManager`)
-- **PySide6 (Qt6) Modern Interface**: Fast, responsive desktop client running natively on Windows 10/11.
-- **Barcode & Issue Slip Entry**: Real-time barcode entry, multi-item issue slips, and atomic stock deductions.
-- **Barcode & Label Generator**: Generate Code128 and QR codes, real-time label previews, PNG export, and printable A4 PDF sticker sheets.
-- **Stock Database Ledger**: Complete material catalog, live search filters, adjustments with audit logging, and CSV/Excel import & export.
-- **Wireless Mobile Controller**: Monitor connected mobile scanners, manage paired devices, revoke tokens, and view real-time sync pulses.
-
-### Android Mobile App (`TTL Scanner`)
-- **Jetpack Compose + Material 3**: Sleek dark industrial UI optimized for warehouse lighting.
-- **CameraX + Google ML Kit**: Instant offline barcode & QR code recognition.
-- **Continuous & Single Scan**: High-speed continuous conveyor scanning with duplicate throttling and haptic audio feedback.
-- **Offline Room Database**: Full offline queue with automatic exponential backoff retries via Android WorkManager.
-- **Hardware Torch & Torch Toggle**: In-app flashlight toggle for dimly lit storage bays.
-
----
-
-## 🚀 Quick Setup & Pairing Guide
+No need to install custom APKs or configure web servers. Connect your smartphone in seconds:
 
 ```
-+-------------------+      LAN Wi-Fi or Cloudflare Tunnel      +-------------------+
-|   Android Phone   | ---------------------------------------> |  Windows Desktop  |
-|   (TTL Scanner)   | <--------------------------------------- | (IssueSlipManager)|
-+-------------------+       Encrypted HTTPS / Bearer Token     +-------------------+
++------------------------------------+           Wi-Fi           +------------------------------------+
+|  Smartphone (Google Play Store)    | ------------------------> |  Issue Slip Manager (PC Desktop)   |
+|  "GlobalScan: Barcode & QR to PC"  |       Virtual Wedge       |  Active Issue Slip / Inward Form   |
++------------------------------------+                           +------------------------------------+
 ```
 
-### Step 1: Launch Desktop App
-1. Extract `IssueSlipManager-v1.0.0-Windows-x64.zip`.
-2. Run `IssueSlipManager.exe`.
-3. Click the **Connect Phone** button in the top navigation bar. A 6-digit pairing code and QR code will appear.
+### Option 1: "GlobalScan: Barcode & QR to PC" from Google Play Store (Recommended)
+1. Install **GlobalScan: Barcode & QR to PC** (or *Barcode to PC*) directly from the Google Play Store on your Android phone.
+2. In Issue Slip Manager on your PC, click **Connect Phone** in the top navigation bar to display the server pairing QR code.
+3. In the mobile app, tap **Scan Server QR** and scan the QR code on your PC monitor.
+4. Point your phone at any barcode or QR sticker. Scans are automatically typed into your active Issue Slip field in real-time!
 
-### Step 2: Install & Pair Mobile App
-1. Install `TTL-Scanner-1.0.0.apk` on your Android device (ensure "Install unknown apps" permission is enabled).
-2. Open **TTL Scanner**.
-3. Tap **Scan Setup QR** and scan the QR code displayed on your desktop screen.
-4. The device exchanges cryptographic tokens and pairs instantly.
-
-### Step 3: Scan Materials
-- Switch between **Issue Mode** (deduct from open slip) and **Receive Mode** (plant inward).
-- Aim camera at barcode or QR sticker. Scans beam directly into the desktop view in under 100 milliseconds.
+### Option 2: Instant Phone Camera Scanner (Zero App Install)
+* Simply open your smartphone's default **Camera** or **QR Scanner** app.
+* Scan the QR code shown in **Connect Phone**.
+* Your phone's browser (Chrome, Safari, Edge) opens the high-speed local scanner web app instantly — zero app installation required!
 
 ---
 
-## 🔐 Architecture & Hardened Security
+## 🖥️ Primary Modules
 
-- **Loopback Remote Listener**: Desktop remote listener binds strictly to `127.0.0.1:8444`. Only authenticated reverse-proxy traffic can reach it.
-- **Sliding-Window Rate Limiting**: Max 60 requests/minute per IP, rejecting brute-force or malicious scanning.
-- **Payload Restrictions**: Hard 64 KB maximum request body prevents memory exhaustion.
-- **Strict Bearer Tokens**: Cryptographically secure 32-byte hexadecimal device tokens stored in SQLite on desktop and Android `EncryptedSharedPreferences` on mobile.
-- **Clean Distribution Integrity**: Windows release zip is pre-initialized with a pristine empty SQLite database (10 tables, 0 records, 0 private certificates, 0 logs).
+1. **Barcode & Issue Slip Entry**:
+   - Supports wireless phone scanners, USB barcode guns, and manual entry.
+   - Real-time stock availability check with automatic deduction on finalized slips.
+   - Generates professional PDF slips matching standard industrial templates and exports to Excel.
+
+2. **Barcode & Label Generator**:
+   - Creates Code128 barcodes and 2D QR codes.
+   - Prints single thermal roll stickers (50x25mm) or multi-label A4 sticker sheets.
+   - Batch export catalog with embedded QR images to Excel.
+
+3. **Stock Database Ledger**:
+   - Complete material master catalog with category filtering.
+   - Stock adjustments with audit trail and historical ledger.
+   - Inward purchase receiving with vendor invoice tracking.
 
 ---
 
-## 🛠️ Building From Source
+## 🚀 Running Locally
 
-### Desktop (Python 3.11)
 ```powershell
-# Clone repo
+# Clone repository
 git clone https://github.com/sameerrout/time.git
 cd time
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Run desktop app
+# Launch desktop app
 python main.py
 
-# Run test suite (84 tests)
+# Run test suite (76 tests)
 python -m unittest discover -s tests -t .
-```
-
-### Android Scanner App
-```powershell
-cd android
-./gradlew testReleaseUnitTest
-./gradlew assembleRelease
-```
-
-### Automated Release Packaging
-```powershell
-# Produces clean release ZIP, signed APK, and updates web/releases.json
-powershell -ExecutionPolicy Bypass -File scripts\release.ps1
 ```
 
 ---
 
 ## 📄 License
-Proprietary &copy; 2026. All rights reserved. Built with Python, PySide6, Kotlin, Jetpack Compose, and SQLite.
+Proprietary &copy; 2026. All rights reserved. Built with Python, PySide6, and SQLite.

@@ -13,8 +13,6 @@ from app.core.config import (
 )
 from app.core.logger import get_logger
 from app.server.http_server import start_server, stop_server, server_signals
-from app.remote.remote_server import start_remote_server, stop_remote_server
-from app.remote.tunnel_manager import get_tunnel_manager, tunnel_signals
 from app.ui.dialogs.connect_phone_dialog import ConnectPhoneDialog
 from app.services.settings_service import SettingsService
 from app.ui.views.home_view import HomeView
@@ -42,12 +40,6 @@ class MainWindow(QMainWindow):
         self.server = start_server(port=8443)
         server_signals.scan_received.connect(self._on_mobile_scan_received)
         server_signals.server_status.connect(self._on_server_status_changed)
-
-        # Start Hardened Remote Loopback Server (127.0.0.1:8444) & Tunnel Manager
-        self.remote_server = start_remote_server(port=8444)
-        self.tunnel_manager = get_tunnel_manager()
-        self.tunnel_manager.start()
-        tunnel_signals.status_changed.connect(self._on_tunnel_status_changed)
 
         self.init_ui()
         self.setup_status_bar()
@@ -232,25 +224,11 @@ class MainWindow(QMainWindow):
 
     def _on_server_status_changed(self, running: bool, url: str):
         if running:
-            self.lbl_status_center.setText(f"📱 Scanner URL: {url}")
+            self.lbl_status_center.setText(f"📱 Wireless Scanner: {url}")
         else:
             self.lbl_status_center.setText("Offline Standalone Edition")
 
-    def _on_tunnel_status_changed(self, status: str, url: str, error: str):
-        if status == "online" and url:
-            self.lbl_status_center.setText(f"🌐 Remote: {url}")
-        elif status == "starting":
-            self.lbl_status_center.setText("🌐 Remote: Connecting...")
-
     def closeEvent(self, event):
-        try:
-            self.tunnel_manager.stop()
-        except Exception:
-            pass
-        try:
-            stop_remote_server()
-        except Exception:
-            pass
         try:
             stop_server()
         except Exception:

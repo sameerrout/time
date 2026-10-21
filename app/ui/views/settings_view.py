@@ -7,7 +7,6 @@ from PySide6.QtCore import Qt, Signal
 from app.services.settings_service import SettingsService
 from app.core.config import DB_FILE, LOG_FILE, BACKUPS_DIR
 from app.core.logger import get_recent_logs, get_logger
-from app.remote.tunnel_manager import get_tunnel_manager
 
 logger = get_logger("IssueSlipApp.SettingsView")
 
