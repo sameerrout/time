@@ -1,0 +1,14 @@
+# Ignore native application source trees during Vercel static deployments
+android/
+app/
+tests/
+scripts/
+bin/
+data/
+backups/
+dist/
+build/
+*.py
+*.bat
+*.spec
+*.md
